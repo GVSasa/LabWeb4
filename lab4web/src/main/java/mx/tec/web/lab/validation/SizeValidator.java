@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
+/**
+ * 
+ * @author sebas
+ * Validates the size of a String
+ */
 public class SizeValidator implements ConstraintValidator<ValidSize, String> {
 	private final List<String> validSizes = Arrays.asList("XS", "S" , "M", "L", "XL");
 

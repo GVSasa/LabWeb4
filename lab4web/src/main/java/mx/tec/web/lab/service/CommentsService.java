@@ -41,7 +41,7 @@ public class CommentsService {
 	private String endpoint;
 
 	/**
-	 * No args constructor
+	 * Comments creation
 	 */
 	public CommentsService(@Value("${commentsEndpoint}") String endpoint) {
 		this.endpoint = endpoint;

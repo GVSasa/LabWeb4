@@ -11,9 +11,12 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import mx.tec.web.lab.controller.ProductController;
 import mx.tec.web.lab.dao.ProductDAO;
 import mx.tec.web.lab.vo.ProductVO;
 
@@ -25,17 +28,22 @@ import mx.tec.web.lab.vo.ProductVO;
  */
 @Service
 public class ProductManager {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ProductManager.class);
+	
 	/**
 	 * Reference to the Product DAO
 	 */
 	@Resource
 	private ProductDAO productDAO;
 	
+	
 	/**
 	 * Retrieve all the products
 	 * @return List of products
 	 */
 	public List<ProductVO> getProducts() {
+		LOG.info("get all products available");
 		return productDAO.findAll();
 	}
 
@@ -45,6 +53,7 @@ public class ProductManager {
 	 * @return Optional containing a product if the product was found or empty otherwise
 	 */
 	public Optional<ProductVO> getProduct(final long id) {
+		LOG.info("get product with id: {}", id);
 		return productDAO.findById(id);
 	}
 
@@ -54,6 +63,7 @@ public class ProductManager {
 	 * @return Optional containing a product if the product was found or empty otherwise
 	 */
 	public List<ProductVO> getProducts(final String pattern) {
+		LOG.info("get products by name: {}", pattern);
 		return productDAO.findByNameLike(pattern);
 	}
 	
@@ -63,6 +73,7 @@ public class ProductManager {
 	 * @return An Optional containing the new product
 	 */
 	public ProductVO addProduct(final ProductVO newProduct) {
+		LOG.info("add a new product: {}", newProduct);
 		return productDAO.insert(newProduct);
 	}
 	
@@ -71,6 +82,7 @@ public class ProductManager {
 	 * @param existingProduct The product to delete
 	 */
 	public void deleteProduct(final ProductVO existingProduct) {
+		LOG.info("delete an existing product by product: {}", existingProduct);
 		productDAO.remove(existingProduct);
 	}
 	
@@ -80,10 +92,14 @@ public class ProductManager {
 	 * @param modifiedProduct The product new version
 	 */
 	public void updateProduct(final long id, final ProductVO modifiedProduct) {
+		LOG.info("update product by id: {}", id);
 		final Optional<ProductVO> existingProduct = getProduct(id);
 		
 		if (existingProduct.isPresent()) {
 			productDAO.update(modifiedProduct);
+		}
+		else {
+			LOG.warn("Product not found");
 		}
 	}		
 }

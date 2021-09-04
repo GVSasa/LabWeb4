@@ -1,0 +1,11 @@
+mx.tec.web.lab
+mx.tec.web.lab.controller
+mx.tec.web.lab.dao
+mx.tec.web.lab.entity
+mx.tec.web.lab.manager
+mx.tec.web.lab.mapper
+mx.tec.web.lab.repository
+mx.tec.web.lab.service
+mx.tec.web.lab.service.vo
+mx.tec.web.lab.validation
+mx.tec.web.lab.vo

@@ -12,10 +12,23 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
 @Constraint(validatedBy = SizeValidator.class)
+
+/**
+ * 
+ * @author sebas
+ * Indicates the valid size
+ */
 public @interface ValidSize {
+	/*
+	 * Invalidates size
+	 */
 	String message() default "Invalid size";
-
+	/*
+	 * 
+	 */
 	Class<?>[] groups() default {};
-
+	/*
+	 * 
+	 */
 	Class<? extends Payload>[] payload() default {};
 }
